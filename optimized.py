@@ -1,6 +1,9 @@
 
-import threading
+from multiprocessing import Process
+from multiprocessing import Pool
+import multiprocessing as mp
 import time
+from itertools import product
 
 def readLines(file):
     fileHandle = open(file)
@@ -17,14 +20,43 @@ def contains(outer, inner):
     return inner in outer
 
 
-class Worker(threading.Thread):
-    def __init__(self, group=None, target=None, name=None,
-                listsByLengthRef=None, sixLetterList=None, resultList=None, *, daemon=None):
-        super().__init__(group=group, target=target, name=name,daemon=daemon)
+# def findSubWords(bigWord, wordLists, subWordSize, resultList):
+#     for subWord1 in wordLists[subWordSize]:
+#         if bigWord.startswith(subWord1):
+#             smallword = bigWord[subWordSize:]
+#             for subWord2 in wordLists[6-subWordSize]:
+#                 if smallword is subWord2:
+#                     resultList.append("Word: " + bigWord + " : " + subWord1 + " " + subWord2)
+#         elif bigWord.endswith(subWord1):
+#             smallword = bigWord[:subWordSize]
+#             for subWord2 in wordLists[6-subWordSize]:
+#                 if smallword is subWord2:
+#                     resultList.append("Word: " + bigWord + " : " + subWord1 + " " + subWord2)
+
+# def processPartialList(listsByLengthRef, sixLetterList, results):
+#     print("started process")
+#     resultList = list()
+#     for sixLetterWord in sixLetterList:
+#         findSubWords(sixLetterWord, listsByLengthRef, 5, resultList)
+#         findSubWords(sixLetterWord, listsByLengthRef, 4, resultList)
+
+#         for threeLetterWord in listsByLengthRef[3]:
+#             if sixLetterWord.endswith(threeLetterWord):
+#                 smallword = sixLetterWord[:3]
+#                 for otherThreeLetterWord in listsByLengthRef[3]:
+#                     if smallword in otherThreeLetterWord:
+#                         resultList.append("Word: " + sixLetterWord + " : " + otherThreeLetterWord + " " + threeLetterWord)
+#     results.put(resultList)
+#     results.close()
+#     results.join_thread()
+#     print("ending process")
+
+class subWordFinder:
+    def __init__(self, listsByLengthRef, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         self.listsByLengthRef = listsByLengthRef
-        self.sixLetterList = sixLetterList
-        self.resultList = resultList
     
+
     def findSubWords(self, bigWord, wordLists, subWordSize, resultList):
         for subWord1 in wordLists[subWordSize]:
             if bigWord.startswith(subWord1):
@@ -38,58 +70,73 @@ class Worker(threading.Thread):
                     if smallword is subWord2:
                         resultList.append("Word: " + bigWord + " : " + subWord1 + " " + subWord2)
 
-    def run(self):
-        for sixLetterWord in self.sixLetterList:
-            self.findSubWords(sixLetterWord, self.listsByLengthRef, 5, self.resultList)
-            self.findSubWords(sixLetterWord, self.listsByLengthRef, 4, self.resultList)
+    def processWord(self,word):
+        resultList = list()
+        self.findSubWords(word, self.listsByLengthRef, 5, resultList)
+        self.findSubWords(word, self.listsByLengthRef, 4, resultList)
 
-            for threeLetterWord in self.listsByLengthRef[3]:
-                if sixLetterWord.endswith(threeLetterWord):
-                    smallword = sixLetterWord[:3]
-                    for otherThreeLetterWord in self.listsByLengthRef[3]:
-                        if smallword in otherThreeLetterWord:
-                            self.resultList.append("Word: " + sixLetterWord + " : " + otherThreeLetterWord + " " + threeLetterWord)
-
-
+        for threeLetterWord in self.listsByLengthRef[3]:
+            if word.endswith(threeLetterWord):
+                smallword = word[:3]
+                for otherThreeLetterWord in self.listsByLengthRef[3]:
+                    if smallword in otherThreeLetterWord:
+                        resultList.append("Word: " + word + " : " + otherThreeLetterWord + " " + threeLetterWord)
+        return resultList
 
 
 start_time = time.time()
-threadcount = 2
+processCount = 10
 
 words = readLines("words.txt")
 listsByLength = list()
 for i in range(0,7):
     listsByLength.append(getListOfLength(i, words))
 
-
 results = list()
-sixLetterWordSections = list()
-for i in range(0,threadcount):
-    sixLetterWordSections.append(list())
-    results.append(list())
+swf = subWordFinder(listsByLength)
+with Pool(processes=6) as pool:
+    results += pool.starmap(func=swf.processWord,
+        iterable=zip(listsByLength[6]))
 
-i = 0
-for word in listsByLength[6]:
-    sixLetterWordSections[i%threadcount].append(word)
-    i+=1
+count=0
+for result in results:
+    for res in result:
+        count += 1
+        print(res)
+print("--- count: %s" % count)
+print("--- seconds: %s " % (time.time() - start_time))
+# results = mp.Queue()
+# sixLetterWordSections = list()
+# for i in range(0,processCount):
+#     sixLetterWordSections.append(list())
 
-workers = list()
-for j in range(0,threadcount):
-    workers.append(Worker(listsByLengthRef=listsByLength, sixLetterList=sixLetterWordSections[j], resultList=results[j]))
-    workers[j].start()
+# i = 0
+# for word in listsByLength[6]:
+#     sixLetterWordSections[i%processCount].append(word)
+#     i+=1
 
-main_thread = threading.main_thread()
-for t in threading.enumerate():
-    if t is not main_thread:
-        t.join()
+# workers = list()
+# for j in range(0,processCount):
+#     workers.append(Process(
+#         target=processPartialList, 
+#         args=(listsByLength, sixLetterWordSections[j], results,),
+#         daemon=False))
+#     workers[j].start()
 
-finalResults = list()
-count = 0
-for res in results:
-    finalResults+=res
-    count += len(res)
 
-for result in finalResults:
-    print(result)
-print(str(count) + " results")
-print("--- %s seconds ---" % (time.time() - start_time))
+# time.sleep(1)
+# print("waiting for workers")
+# print(len(workers))
+
+# workers[0].join()
+# print("one joined")
+# for worker in workers:
+#     worker.join()
+#     print("one worker joined")
+
+# count = 0
+# while not results.empty():
+#     for res in results.get():
+#         print(res)
+#         count += 1
+# print("Count: " + str(count))
