@@ -15,21 +15,16 @@ def hasSixLetters(word):
 def contains(outer, inner):
     return outer.endswith(inner) and (inner is not outer)
 def findOtherInnerWord(word, innerWord, words):
-    small = word.replace(innerWord,"")
+    small = word.replace(innerWord,"",1)
     if small in words:
         return "Word: " + word + " InnerWords: " + small + " " + innerWord
 
-    
-
 
 words = readLines("words.txt")
-
 for word in words:
-    if not hasSixLetters(word):
-        break
-    
-    for possibleInnerWord in words:
-        if contains(word, possibleInnerWord):
-            result = findOtherInnerWord(word, possibleInnerWord, words)
-            if result is not None:
-                print(result)
+    if hasSixLetters(word):
+        for possibleInnerWord in words:
+            if contains(word, possibleInnerWord):
+                result = findOtherInnerWord(word, possibleInnerWord, words)
+                if result is not None:
+                    print(result)
