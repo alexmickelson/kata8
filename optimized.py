@@ -85,7 +85,7 @@ class subWordFinder:
 
 
 start_time = time.time()
-processCount = 10
+#processCount = 10
 
 words = readLines("words.txt")
 listsByLength = list()

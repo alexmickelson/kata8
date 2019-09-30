@@ -12,8 +12,8 @@ def readLines(file):
     return words
 def hasSixLetters(word):
     return word.__len__() == 6
-def contains(outer, inner):
     return outer.endswith(inner) and (inner is not outer)
+def contains(outer, inner):
 def findOtherInnerWord(word, innerWord, words):
     small = word.replace(innerWord,"",1)
     if small in words:
