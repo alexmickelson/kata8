@@ -1,19 +1,18 @@
 import unittest
 import modular
 
+
 class testModular(unittest.TestCase):
 
     def test_GetRightRangeForIndexes(self):
-        expected = range(0,2)
+        expected = range(0, 2)
         actual = modular.wordSizesSmallerThan("aa")
-        self.assertEqual(expected,actual)
+        self.assertEqual(expected, actual)
 
-
-    def test_GetRightRangeForIndexes(self):
-        expected = range(0,3)
+    def test_GetRightRangeForIndexesWithDifferentSize(self):
+        expected = range(0, 3)
         actual = modular.wordSizesSmallerThan("a4a")
-        self.assertEqual(expected,actual)
-
+        self.assertEqual(expected, actual)
 
     def test_canGetStartingWords(self):
         dummyCollection = {
@@ -21,12 +20,12 @@ class testModular(unittest.TestCase):
             1: ['a'],
             2: ['ab'],
             3: ['ade'],
-            4: ['abcd']
+            4: ['abcd'],
+            6: []
             }
         expected = ['a', 'ab']
         acutal = modular.getStartingWords('abcd', dummyCollection)
         self.assertEqual(expected, acutal)
-
 
     def test_GetsCorrectCompletingWords(self):
         dummyCollection = {
@@ -34,12 +33,14 @@ class testModular(unittest.TestCase):
             1: ['a'],
             2: ['ab'],
             3: ['ade'],
-            4: ['abcd']
+            4: ['abcd'],
+            6: []
             }
         expected = ['a']
-        actual = modular.getCompletingWords('endswitha', 'endswith', dummyCollection)
+        actual = modular.getCompletingWords('endswitha',
+                                            'endswith',
+                                            dummyCollection)
         self.assertEqual(expected, actual)
-
 
     def test_CompletingWordsHandlesIfNotFound(self):
         dummyCollection = {
@@ -47,26 +48,32 @@ class testModular(unittest.TestCase):
             1: [],
             2: ['ab'],
             3: ['ade'],
-            4: ['abcd']
+            4: ['abcd'],
+            6: []
             }
         expected = []
-        actual = modular.getCompletingWords('endswitha', 'endswith', dummyCollection)
+        actual = modular.getCompletingWords('endswitha',
+                                            'endswith',
+                                            dummyCollection)
         self.assertEqual(expected, actual)
 
     def test_GetCorrespondingWords(self):
         bigword = 'thanos'
-        smallword='than'
+        smallword = 'than'
         dummyCollection = {
             0: [],
             1: ['a'],
             2: ['ab', 'os'],
             3: ['ade'],
-            4: ['abcd']
+            4: ['abcd'],
+            6: []
             }
         expected = ['os']
-        actual = modular.getCompletingWords(bigword, smallword, dummyCollection)
+        actual = modular.getCompletingWords(bigword,
+                                            smallword,
+                                            dummyCollection)
         self.assertEqual(expected, actual)
-    
+
     def test_findWordPartsFromCollections(self):
         dummyCollection = {
             0: [],
@@ -74,13 +81,13 @@ class testModular(unittest.TestCase):
             2: ['ab', 'os'],
             3: ['ade'],
             4: ['abcd', 'than'],
-            5: ['asdff']
+            5: ['asdff'],
+            6: []
             }
-        compositeWord='thanos'
+        compositeWord = 'thanos'
         expected = [('thanos', 'than', 'os')]
         actual = modular.findContainedWords(compositeWord, dummyCollection)
         self.assertEqual(expected, actual)
-    
 
     def test_findContainedWordsHandlesIfNoSecondHalf(self):
         dummyCollection = {
@@ -89,18 +96,19 @@ class testModular(unittest.TestCase):
             2: ['ab', 'os'],
             3: ['ade'],
             4: ['abcd', 'than', 'chad'],
-            5: ['asdff']
+            5: ['asdff'],
+            6: []
             }
         wordToFind = 'chadius'
         expected = []
-        #actual = modular.findContainedWords(wordToFind, dummyCollection)
-        #self.assertEqual(expected, actual)
+        actual = modular.findContainedWords(wordToFind, dummyCollection)
+        self.assertEqual(expected, actual)
 
     def test_sortsItemsCorrectly(self):
-        dummyArray=['a', 'aa', 'aaa']
+        dummyArray = ['a', 'aa', 'aaa']
         expected = {
-            1: ['a'], 
-            2: ['aa'], 
+            1: ['a'],
+            2: ['aa'],
             3: ['aaa']
             }
         actual = modular.sortItemsByLength(dummyArray)
@@ -117,12 +125,10 @@ class testModular(unittest.TestCase):
         modular.initializeMissingKeys(startDictionary)
         self.assertEqual(expected, startDictionary)
 
-
     def test_validateTargetWordSize(self):
         with self.assertRaises(ValueError):
-            modular.validateTargetWordSize(9, {0:[]})
-        
+            modular.validateTargetWordSize(9, {0: []})
+
 
 if __name__ == "__main__":
     unittest.main()
-    

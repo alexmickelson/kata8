@@ -58,11 +58,11 @@ def itemIsLastPart(big: str, small: str):
 
 def listOfRightSizedWords(big: str,
                           small: str,
-                          collections: dict[int, List[str]]):
+                          collections: dict):
     return collections[len(big) - len(small)]
 
 
-def getStartingWords(bigWord: str, wordCollections: dict[int, List[str]]):
+def getStartingWords(bigWord: str, wordCollections: dict):
     """
     Parses the wordcollections for smaller words that are the start
     of the bigWord
@@ -77,7 +77,7 @@ def getStartingWords(bigWord: str, wordCollections: dict[int, List[str]]):
 
 def getCompletingWords(bigWord: str,
                        smallWord: str,
-                       wordCollections: Dict[int, List[str]]):
+                       wordCollections: dict):
     """
     if another word is in the collection that can append
     to smallWord to make bigWord it will return
@@ -91,7 +91,7 @@ def getCompletingWords(bigWord: str,
     return []
 
 
-def findContainedWords(word: str, wordCollections: dict[int, List[str]]):
+def findContainedWords(word: str, wordCollections: dict):
     """
     finds all words wordCollections that can be combined to make word
 
@@ -108,7 +108,7 @@ def findContainedWords(word: str, wordCollections: dict[int, List[str]]):
     return results
 
 
-def validateTargetWordSize(size: int, collections: dict[int, List[str]]):
+def validateTargetWordSize(size: int, collections: dict):
     """ checks that the size targeted is in the collections keys"""
     if size not in collections.keys():
         raise ValueError("Target word size is not valid")
