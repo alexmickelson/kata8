@@ -135,7 +135,8 @@ def main():
 
 
 if __name__ == "__main__":
-    """Count: 30599
+    """
+    Count: 30599
     Seconds: 138.884605884552,
 
     Count: 30599
