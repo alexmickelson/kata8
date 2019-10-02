@@ -55,6 +55,6 @@ if __name__ == "__main__":
     #process words by set unions as well
     results = processWords(listsByLength, processCount)
 
-    resultCount = getCountAndPrint(results)
+    PresultCount = getCountAndPrint(results)
     print("--- count: %s" % resultCount)
     print("--- seconds: %s " % (time.time() - start_time))

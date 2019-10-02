@@ -24,17 +24,12 @@ class TestOptimized(unittest.TestCase):
         dummyCollection = ['1', '22', '333', '4444', '55555', '666666']
         resultingCollection = [ [], [''], ['22'], ['333'], ['4444'], ['55555'], ['666666']]
         self.assertNotEqual(optimized.splitByLength(dummyCollection), resultingCollection)
-
-    @mock.patch('optimized.Pool')
-    def test_FindsCorrectCompositeWords(self, mock_pool):
-        dummyListsByLength = [ [], [''], ['22'], ['333'], ['4444'], ['55555'], ['444422']]
-        expected = ["a correct result"]
-        returnValue = mock_pool.return_value
-        returnValue.starmap = mock.MagicMock(returnValue=expected)
-        returnValue.return_value = expected
-        
-        self.assertEqual(expected, optimized.processWords(dummyListsByLength, processCount=1))
-
+    
+    def test_integrationTest(self):
+        dummyCollection = [ [], ['1'], ['22'], ['333'], ['4444'], ['55555'], [ '333333', '555551']]
+        results = optimized.processWords(dummyCollection, 2)
+        expected = [["Word: 333333 : 333 333"],["Word: 555551 : 55555 1"]] 
+        self.assertEqual(expected, results)
 
 if __name__ == "__main__":
     unittest.main()
