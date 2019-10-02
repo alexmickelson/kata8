@@ -12,7 +12,7 @@ def readLines(file: str):
     return words
 
 
-def initializeMissingKeys(dictionary: dict):
+def initializeMissingKeys(dictionary: Dict):
     """
     if the dictionary has keys 1, 3, 5 it will fill in the
     missing values of 0, 2, 4. Returning a dictionary with
@@ -27,7 +27,7 @@ def initializeMissingKeys(dictionary: dict):
         index += 1
 
 
-def sortItemsByLength(collection: dict):
+def sortItemsByLength(collection: Dict):
     """
     places items in an array in a dictionary
     where the key is the items length
@@ -58,11 +58,11 @@ def itemIsLastPart(big: str, small: str):
 
 def listOfRightSizedWords(big: str,
                           small: str,
-                          collections: dict):
+                          collections: Dict[int, List[str]]):
     return collections[len(big) - len(small)]
 
 
-def getStartingWords(bigWord: str, wordCollections: dict):
+def getStartingWords(bigWord: str, wordCollections: Dict[int, List[str]]):
     """
     Parses the wordcollections for smaller words that are the start
     of the bigWord
@@ -77,7 +77,7 @@ def getStartingWords(bigWord: str, wordCollections: dict):
 
 def getCompletingWords(bigWord: str,
                        smallWord: str,
-                       wordCollections: dict):
+                       wordCollections: Dict[int, List[str]]):
     """
     if another word is in the collection that can append
     to smallWord to make bigWord it will return
@@ -91,7 +91,7 @@ def getCompletingWords(bigWord: str,
     return []
 
 
-def findContainedWords(word: str, wordCollections: dict):
+def findContainedWords(word: str, wordCollections: Dict[int, List[str]]):
     """
     finds all words wordCollections that can be combined to make word
 
@@ -108,7 +108,7 @@ def findContainedWords(word: str, wordCollections: dict):
     return results
 
 
-def validateTargetWordSize(size: int, collections: dict):
+def validateTargetWordSize(size: int, collections: Dict[int, List[str]]):
     """ checks that the size targeted is in the collections keys"""
     if size not in collections.keys():
         raise ValueError("Target word size is not valid")
@@ -141,5 +141,8 @@ if __name__ == "__main__":
 
     Count: 30599
     Seconds: 147.0303237438202
+
+    Count: 30599
+    Seconds: 116.19400000572205
     """
     main()

@@ -57,7 +57,7 @@ if __name__ == "__main__":
     --- count: 14823
     --- seconds: 29.486300468444824
     """
-    processCount = 10
+    processCount = 3
     start_time = time.time()
 
     listsByLength = splitByLength(readLines("words.txt"))
