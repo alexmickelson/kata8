@@ -1,5 +1,6 @@
 import time
 from typing import List, Dict
+from pprint import pprint as pp
 
 
 def readLines(file: str):
@@ -115,7 +116,6 @@ def validateTargetWordSize(size: int, collections: Dict[int, List[str]]):
 
 
 def main():
-
     start_time = time.time()
     collection = readLines("words.txt")
     targetWordSize = 6
@@ -129,7 +129,7 @@ def main():
     for word in sortedCollections[targetWordSize]:
         results += findContainedWords(word, sortedCollections)
 
-    print(results)
+    pp(results)
     print('Count: ' + str(len(results)))
     print("Seconds: %s " % (time.time() - start_time))
 
@@ -144,5 +144,8 @@ if __name__ == "__main__":
 
     Count: 30599
     Seconds: 116.19400000572205
+
+    Count: 30599
+    Seconds: 127.60181665420532
     """
     main()

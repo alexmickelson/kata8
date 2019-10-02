@@ -50,12 +50,15 @@ def getCountAndPrint(items):
 
 if __name__ == "__main__":
     """
-    5 threads:
+    5 processes:
     --- count: 12734
     --- seconds: 29.153401613235474
-    10 threads:
+    10 processes:
     --- count: 14823
     --- seconds: 29.486300468444824
+    3 processes:
+    --- count: 14823
+    --- seconds: 45.17243981361389
     """
     processCount = 3
     start_time = time.time()
