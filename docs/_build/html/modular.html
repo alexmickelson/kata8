@@ -1,0 +1,248 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>modular package &#8212; kata8  documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="modular-package">
+<h1>modular package<a class="headerlink" href="#modular-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-modular.modular">
+<span id="modular-modular-module"></span><h2>modular.modular module<a class="headerlink" href="#module-modular.modular" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="modular.modular.findContainedWords">
+<code class="sig-prename descclassname">modular.modular.</code><code class="sig-name descname">findContainedWords</code><span class="sig-paren">(</span><em class="sig-param">word: str, wordCollections: Dict[int, List[str]]</em><span class="sig-paren">)</span> &#x2192; Tuple[str, str, str]<a class="reference internal" href="_modules/modular/modular.html#findContainedWords"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#modular.modular.findContainedWords" title="Permalink to this definition">¶</a></dt>
+<dd><p>finds all words wordCollections that can be combined to make word</p>
+<p>an array of tuples with the structure (word, firstHalf, secondHalf)</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="modular.modular.getCompletingWords">
+<code class="sig-prename descclassname">modular.modular.</code><code class="sig-name descname">getCompletingWords</code><span class="sig-paren">(</span><em class="sig-param">bigWord: str, smallWord: str, wordCollections: Dict[int, List[str]]</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modular/modular.html#getCompletingWords"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#modular.modular.getCompletingWords" title="Permalink to this definition">¶</a></dt>
+<dd><p>if another word is in the collection that can append
+to smallWord to make bigWord it will return</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="modular.modular.getStartingWords">
+<code class="sig-prename descclassname">modular.modular.</code><code class="sig-name descname">getStartingWords</code><span class="sig-paren">(</span><em class="sig-param">bigWord: str, wordCollections: Dict[int, List[str]]</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modular/modular.html#getStartingWords"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#modular.modular.getStartingWords" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parses the wordcollections for smaller words that are the start
+of the bigWord</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="modular.modular.initializeMissingKeys">
+<code class="sig-prename descclassname">modular.modular.</code><code class="sig-name descname">initializeMissingKeys</code><span class="sig-paren">(</span><em class="sig-param">dictionary: Dict[int, List[str]]</em><span class="sig-paren">)</span> &#x2192; None<a class="reference internal" href="_modules/modular/modular.html#initializeMissingKeys"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#modular.modular.initializeMissingKeys" title="Permalink to this definition">¶</a></dt>
+<dd><p>if the dictionary has keys 1, 3, 5 it will fill in the
+missing values of 0, 2, 4.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="modular.modular.itemIsFirstPart">
+<code class="sig-prename descclassname">modular.modular.</code><code class="sig-name descname">itemIsFirstPart</code><span class="sig-paren">(</span><em class="sig-param">big: str</em>, <em class="sig-param">small: str</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modular/modular.html#itemIsFirstPart"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#modular.modular.itemIsFirstPart" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="modular.modular.itemIsLastPart">
+<code class="sig-prename descclassname">modular.modular.</code><code class="sig-name descname">itemIsLastPart</code><span class="sig-paren">(</span><em class="sig-param">big: str</em>, <em class="sig-param">small: str</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modular/modular.html#itemIsLastPart"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#modular.modular.itemIsLastPart" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="modular.modular.listOfRightSizedWords">
+<code class="sig-prename descclassname">modular.modular.</code><code class="sig-name descname">listOfRightSizedWords</code><span class="sig-paren">(</span><em class="sig-param">big: str, small: str, collections: Dict[int, List[str]]</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modular/modular.html#listOfRightSizedWords"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#modular.modular.listOfRightSizedWords" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="modular.modular.main">
+<code class="sig-prename descclassname">modular.modular.</code><code class="sig-name descname">main</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="reference internal" href="_modules/modular/modular.html#main"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#modular.modular.main" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="modular.modular.readLines">
+<code class="sig-prename descclassname">modular.modular.</code><code class="sig-name descname">readLines</code><span class="sig-paren">(</span><em class="sig-param">file: str</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modular/modular.html#readLines"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#modular.modular.readLines" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads the file and returns an array of each row</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="modular.modular.sortItemsByLength">
+<code class="sig-prename descclassname">modular.modular.</code><code class="sig-name descname">sortItemsByLength</code><span class="sig-paren">(</span><em class="sig-param">collection: Dict[int, List[str]]</em><span class="sig-paren">)</span> &#x2192; Dict[int, List[str]]<a class="reference internal" href="_modules/modular/modular.html#sortItemsByLength"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#modular.modular.sortItemsByLength" title="Permalink to this definition">¶</a></dt>
+<dd><p>places items in an array in a dictionary
+where the key is the items length</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="modular.modular.validateTargetWordSize">
+<code class="sig-prename descclassname">modular.modular.</code><code class="sig-name descname">validateTargetWordSize</code><span class="sig-paren">(</span><em class="sig-param">size: int, collections: Dict[int, List[str]]</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modular/modular.html#validateTargetWordSize"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#modular.modular.validateTargetWordSize" title="Permalink to this definition">¶</a></dt>
+<dd><p>checks that the size of word targeted is in the collections keys</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="modular.modular.wordSizesSmallerThan">
+<code class="sig-prename descclassname">modular.modular.</code><code class="sig-name descname">wordSizesSmallerThan</code><span class="sig-paren">(</span><em class="sig-param">word: range</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modular/modular.html#wordSizesSmallerThan"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#modular.modular.wordSizesSmallerThan" title="Permalink to this definition">¶</a></dt>
+<dd><p>returns a range starting at 0 and going up to one less
+than the length of the word</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-modular.testModular">
+<span id="modular-testmodular-module"></span><h2>modular.testModular module<a class="headerlink" href="#module-modular.testModular" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="modular.testModular.testModular">
+<em class="property">class </em><code class="sig-prename descclassname">modular.testModular.</code><code class="sig-name descname">testModular</code><span class="sig-paren">(</span><em class="sig-param">methodName='runTest'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modular/testModular.html#testModular"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#modular.testModular.testModular" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">unittest.case.TestCase</span></code></p>
+<dl class="method">
+<dt id="modular.testModular.testModular.test_CompletingWordsHandlesIfNotFound">
+<code class="sig-name descname">test_CompletingWordsHandlesIfNotFound</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/modular/testModular.html#testModular.test_CompletingWordsHandlesIfNotFound"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#modular.testModular.testModular.test_CompletingWordsHandlesIfNotFound" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="modular.testModular.testModular.test_GetCorrespondingWords">
+<code class="sig-name descname">test_GetCorrespondingWords</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/modular/testModular.html#testModular.test_GetCorrespondingWords"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#modular.testModular.testModular.test_GetCorrespondingWords" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="modular.testModular.testModular.test_GetRightRangeForIndexes">
+<code class="sig-name descname">test_GetRightRangeForIndexes</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/modular/testModular.html#testModular.test_GetRightRangeForIndexes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#modular.testModular.testModular.test_GetRightRangeForIndexes" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="modular.testModular.testModular.test_GetRightRangeForIndexesWithDifferentSize">
+<code class="sig-name descname">test_GetRightRangeForIndexesWithDifferentSize</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/modular/testModular.html#testModular.test_GetRightRangeForIndexesWithDifferentSize"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#modular.testModular.testModular.test_GetRightRangeForIndexesWithDifferentSize" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="modular.testModular.testModular.test_GetsCorrectCompletingWords">
+<code class="sig-name descname">test_GetsCorrectCompletingWords</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/modular/testModular.html#testModular.test_GetsCorrectCompletingWords"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#modular.testModular.testModular.test_GetsCorrectCompletingWords" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="modular.testModular.testModular.test_canGetStartingWords">
+<code class="sig-name descname">test_canGetStartingWords</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/modular/testModular.html#testModular.test_canGetStartingWords"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#modular.testModular.testModular.test_canGetStartingWords" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="modular.testModular.testModular.test_findContainedWordsHandlesIfNoSecondHalf">
+<code class="sig-name descname">test_findContainedWordsHandlesIfNoSecondHalf</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/modular/testModular.html#testModular.test_findContainedWordsHandlesIfNoSecondHalf"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#modular.testModular.testModular.test_findContainedWordsHandlesIfNoSecondHalf" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="modular.testModular.testModular.test_findWordPartsFromCollections">
+<code class="sig-name descname">test_findWordPartsFromCollections</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/modular/testModular.html#testModular.test_findWordPartsFromCollections"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#modular.testModular.testModular.test_findWordPartsFromCollections" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="modular.testModular.testModular.test_initializeMissingKeys">
+<code class="sig-name descname">test_initializeMissingKeys</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/modular/testModular.html#testModular.test_initializeMissingKeys"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#modular.testModular.testModular.test_initializeMissingKeys" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="modular.testModular.testModular.test_sortsItemsCorrectly">
+<code class="sig-name descname">test_sortsItemsCorrectly</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/modular/testModular.html#testModular.test_sortsItemsCorrectly"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#modular.testModular.testModular.test_sortsItemsCorrectly" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="modular.testModular.testModular.test_validateTargetWordSize">
+<code class="sig-name descname">test_validateTargetWordSize</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/modular/testModular.html#testModular.test_validateTargetWordSize"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#modular.testModular.testModular.test_validateTargetWordSize" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-modular">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-modular" title="Permalink to this headline">¶</a></h2>
+<p>This is the modular solution for the 8th kata</p>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">kata8</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, alex.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.2.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/modular.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

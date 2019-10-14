@@ -1,0 +1,231 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>modular.testModular &#8212; kata8  documentation</title>
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for modular.testModular</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">unittest</span>
+<span class="kn">import</span> <span class="nn">modular</span>
+
+
+<div class="viewcode-block" id="testModular"><a class="viewcode-back" href="../../modular.html#modular.testModular.testModular">[docs]</a><span class="k">class</span> <span class="nc">testModular</span><span class="p">(</span><span class="n">unittest</span><span class="o">.</span><span class="n">TestCase</span><span class="p">):</span>
+
+<div class="viewcode-block" id="testModular.test_GetRightRangeForIndexes"><a class="viewcode-back" href="../../modular.html#modular.testModular.testModular.test_GetRightRangeForIndexes">[docs]</a>    <span class="k">def</span> <span class="nf">test_GetRightRangeForIndexes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">expected</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="n">actual</span> <span class="o">=</span> <span class="n">modular</span><span class="o">.</span><span class="n">wordSizesSmallerThan</span><span class="p">(</span><span class="s2">&quot;aa&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">expected</span><span class="p">,</span> <span class="n">actual</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="testModular.test_GetRightRangeForIndexesWithDifferentSize"><a class="viewcode-back" href="../../modular.html#modular.testModular.testModular.test_GetRightRangeForIndexesWithDifferentSize">[docs]</a>    <span class="k">def</span> <span class="nf">test_GetRightRangeForIndexesWithDifferentSize</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">expected</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+        <span class="n">actual</span> <span class="o">=</span> <span class="n">modular</span><span class="o">.</span><span class="n">wordSizesSmallerThan</span><span class="p">(</span><span class="s2">&quot;a4a&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">expected</span><span class="p">,</span> <span class="n">actual</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="testModular.test_canGetStartingWords"><a class="viewcode-back" href="../../modular.html#modular.testModular.testModular.test_canGetStartingWords">[docs]</a>    <span class="k">def</span> <span class="nf">test_canGetStartingWords</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">dummyCollection</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="mi">0</span><span class="p">:</span> <span class="p">[],</span>
+            <span class="mi">1</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">],</span>
+            <span class="mi">2</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;ab&#39;</span><span class="p">],</span>
+            <span class="mi">3</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;ade&#39;</span><span class="p">],</span>
+            <span class="mi">4</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;abcd&#39;</span><span class="p">],</span>
+            <span class="mi">6</span><span class="p">:</span> <span class="p">[]</span>
+            <span class="p">}</span>
+        <span class="n">expected</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;ab&#39;</span><span class="p">]</span>
+        <span class="n">acutal</span> <span class="o">=</span> <span class="n">modular</span><span class="o">.</span><span class="n">getStartingWords</span><span class="p">(</span><span class="s1">&#39;abcd&#39;</span><span class="p">,</span> <span class="n">dummyCollection</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">expected</span><span class="p">,</span> <span class="n">acutal</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="testModular.test_GetsCorrectCompletingWords"><a class="viewcode-back" href="../../modular.html#modular.testModular.testModular.test_GetsCorrectCompletingWords">[docs]</a>    <span class="k">def</span> <span class="nf">test_GetsCorrectCompletingWords</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">dummyCollection</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="mi">0</span><span class="p">:</span> <span class="p">[],</span>
+            <span class="mi">1</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">],</span>
+            <span class="mi">2</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;ab&#39;</span><span class="p">],</span>
+            <span class="mi">3</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;ade&#39;</span><span class="p">],</span>
+            <span class="mi">4</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;abcd&#39;</span><span class="p">],</span>
+            <span class="mi">6</span><span class="p">:</span> <span class="p">[]</span>
+            <span class="p">}</span>
+        <span class="n">expected</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">]</span>
+        <span class="n">actual</span> <span class="o">=</span> <span class="n">modular</span><span class="o">.</span><span class="n">getCompletingWords</span><span class="p">(</span><span class="s1">&#39;endswitha&#39;</span><span class="p">,</span>
+                                            <span class="s1">&#39;endswith&#39;</span><span class="p">,</span>
+                                            <span class="n">dummyCollection</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">expected</span><span class="p">,</span> <span class="n">actual</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="testModular.test_CompletingWordsHandlesIfNotFound"><a class="viewcode-back" href="../../modular.html#modular.testModular.testModular.test_CompletingWordsHandlesIfNotFound">[docs]</a>    <span class="k">def</span> <span class="nf">test_CompletingWordsHandlesIfNotFound</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">dummyCollection</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="mi">0</span><span class="p">:</span> <span class="p">[],</span>
+            <span class="mi">1</span><span class="p">:</span> <span class="p">[],</span>
+            <span class="mi">2</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;ab&#39;</span><span class="p">],</span>
+            <span class="mi">3</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;ade&#39;</span><span class="p">],</span>
+            <span class="mi">4</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;abcd&#39;</span><span class="p">],</span>
+            <span class="mi">6</span><span class="p">:</span> <span class="p">[]</span>
+            <span class="p">}</span>
+        <span class="n">expected</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">actual</span> <span class="o">=</span> <span class="n">modular</span><span class="o">.</span><span class="n">getCompletingWords</span><span class="p">(</span><span class="s1">&#39;endswitha&#39;</span><span class="p">,</span>
+                                            <span class="s1">&#39;endswith&#39;</span><span class="p">,</span>
+                                            <span class="n">dummyCollection</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">expected</span><span class="p">,</span> <span class="n">actual</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="testModular.test_GetCorrespondingWords"><a class="viewcode-back" href="../../modular.html#modular.testModular.testModular.test_GetCorrespondingWords">[docs]</a>    <span class="k">def</span> <span class="nf">test_GetCorrespondingWords</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">bigword</span> <span class="o">=</span> <span class="s1">&#39;thanos&#39;</span>
+        <span class="n">smallword</span> <span class="o">=</span> <span class="s1">&#39;than&#39;</span>
+        <span class="n">dummyCollection</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="mi">0</span><span class="p">:</span> <span class="p">[],</span>
+            <span class="mi">1</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">],</span>
+            <span class="mi">2</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;ab&#39;</span><span class="p">,</span> <span class="s1">&#39;os&#39;</span><span class="p">],</span>
+            <span class="mi">3</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;ade&#39;</span><span class="p">],</span>
+            <span class="mi">4</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;abcd&#39;</span><span class="p">],</span>
+            <span class="mi">6</span><span class="p">:</span> <span class="p">[]</span>
+            <span class="p">}</span>
+        <span class="n">expected</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;os&#39;</span><span class="p">]</span>
+        <span class="n">actual</span> <span class="o">=</span> <span class="n">modular</span><span class="o">.</span><span class="n">getCompletingWords</span><span class="p">(</span><span class="n">bigword</span><span class="p">,</span>
+                                            <span class="n">smallword</span><span class="p">,</span>
+                                            <span class="n">dummyCollection</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">expected</span><span class="p">,</span> <span class="n">actual</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="testModular.test_findWordPartsFromCollections"><a class="viewcode-back" href="../../modular.html#modular.testModular.testModular.test_findWordPartsFromCollections">[docs]</a>    <span class="k">def</span> <span class="nf">test_findWordPartsFromCollections</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">dummyCollection</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="mi">0</span><span class="p">:</span> <span class="p">[],</span>
+            <span class="mi">1</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">],</span>
+            <span class="mi">2</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;ab&#39;</span><span class="p">,</span> <span class="s1">&#39;os&#39;</span><span class="p">],</span>
+            <span class="mi">3</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;ade&#39;</span><span class="p">],</span>
+            <span class="mi">4</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;abcd&#39;</span><span class="p">,</span> <span class="s1">&#39;than&#39;</span><span class="p">],</span>
+            <span class="mi">5</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;asdff&#39;</span><span class="p">],</span>
+            <span class="mi">6</span><span class="p">:</span> <span class="p">[]</span>
+            <span class="p">}</span>
+        <span class="n">compositeWord</span> <span class="o">=</span> <span class="s1">&#39;thanos&#39;</span>
+        <span class="n">expected</span> <span class="o">=</span> <span class="p">[(</span><span class="s1">&#39;thanos&#39;</span><span class="p">,</span> <span class="s1">&#39;than&#39;</span><span class="p">,</span> <span class="s1">&#39;os&#39;</span><span class="p">)]</span>
+        <span class="n">actual</span> <span class="o">=</span> <span class="n">modular</span><span class="o">.</span><span class="n">findContainedWords</span><span class="p">(</span><span class="n">compositeWord</span><span class="p">,</span> <span class="n">dummyCollection</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">expected</span><span class="p">,</span> <span class="n">actual</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="testModular.test_findContainedWordsHandlesIfNoSecondHalf"><a class="viewcode-back" href="../../modular.html#modular.testModular.testModular.test_findContainedWordsHandlesIfNoSecondHalf">[docs]</a>    <span class="k">def</span> <span class="nf">test_findContainedWordsHandlesIfNoSecondHalf</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">dummyCollection</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="mi">0</span><span class="p">:</span> <span class="p">[],</span>
+            <span class="mi">1</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">],</span>
+            <span class="mi">2</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;ab&#39;</span><span class="p">,</span> <span class="s1">&#39;os&#39;</span><span class="p">],</span>
+            <span class="mi">3</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;ade&#39;</span><span class="p">],</span>
+            <span class="mi">4</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;abcd&#39;</span><span class="p">,</span> <span class="s1">&#39;than&#39;</span><span class="p">,</span> <span class="s1">&#39;chad&#39;</span><span class="p">],</span>
+            <span class="mi">5</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;asdff&#39;</span><span class="p">],</span>
+            <span class="mi">6</span><span class="p">:</span> <span class="p">[]</span>
+            <span class="p">}</span>
+        <span class="n">wordToFind</span> <span class="o">=</span> <span class="s1">&#39;chadius&#39;</span>
+        <span class="n">expected</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">actual</span> <span class="o">=</span> <span class="n">modular</span><span class="o">.</span><span class="n">findContainedWords</span><span class="p">(</span><span class="n">wordToFind</span><span class="p">,</span> <span class="n">dummyCollection</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">expected</span><span class="p">,</span> <span class="n">actual</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="testModular.test_sortsItemsCorrectly"><a class="viewcode-back" href="../../modular.html#modular.testModular.testModular.test_sortsItemsCorrectly">[docs]</a>    <span class="k">def</span> <span class="nf">test_sortsItemsCorrectly</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">dummyArray</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;aa&#39;</span><span class="p">,</span> <span class="s1">&#39;aaa&#39;</span><span class="p">]</span>
+        <span class="n">expected</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="mi">1</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">],</span>
+            <span class="mi">2</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;aa&#39;</span><span class="p">],</span>
+            <span class="mi">3</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;aaa&#39;</span><span class="p">]</span>
+            <span class="p">}</span>
+        <span class="n">actual</span> <span class="o">=</span> <span class="n">modular</span><span class="o">.</span><span class="n">sortItemsByLength</span><span class="p">(</span><span class="n">dummyArray</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">expected</span><span class="p">,</span> <span class="n">actual</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="testModular.test_initializeMissingKeys"><a class="viewcode-back" href="../../modular.html#modular.testModular.testModular.test_initializeMissingKeys">[docs]</a>    <span class="k">def</span> <span class="nf">test_initializeMissingKeys</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">startDictionary</span> <span class="o">=</span> <span class="p">{</span><span class="mi">3</span><span class="p">:</span> <span class="p">[]}</span>
+        <span class="n">expected</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="mi">0</span><span class="p">:</span> <span class="p">[],</span>
+            <span class="mi">1</span><span class="p">:</span> <span class="p">[],</span>
+            <span class="mi">2</span><span class="p">:</span> <span class="p">[],</span>
+            <span class="mi">3</span><span class="p">:</span> <span class="p">[]</span>
+        <span class="p">}</span>
+        <span class="n">modular</span><span class="o">.</span><span class="n">initializeMissingKeys</span><span class="p">(</span><span class="n">startDictionary</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">expected</span><span class="p">,</span> <span class="n">startDictionary</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="testModular.test_validateTargetWordSize"><a class="viewcode-back" href="../../modular.html#modular.testModular.testModular.test_validateTargetWordSize">[docs]</a>    <span class="k">def</span> <span class="nf">test_validateTargetWordSize</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">assertRaises</span><span class="p">(</span><span class="ne">ValueError</span><span class="p">):</span>
+            <span class="n">modular</span><span class="o">.</span><span class="n">validateTargetWordSize</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="p">[]})</span></div></div>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">unittest</span><span class="o">.</span><span class="n">main</span><span class="p">()</span>
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../index.html">kata8</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, alex.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.2.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

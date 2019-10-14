@@ -1,5 +1,5 @@
 import time
-from typing import List, Dict
+from typing import List, Dict, Tuple
 from pprint import pprint as pp
 
 
@@ -13,11 +13,10 @@ def readLines(file: str):
     return words
 
 
-def initializeMissingKeys(dictionary: Dict):
+def initializeMissingKeys(dictionary: Dict[int, List[str]]) -> None:
     """
     if the dictionary has keys 1, 3, 5 it will fill in the
-    missing values of 0, 2, 4. Returning a dictionary with
-    the keys 0,1,2,3,4,5
+    missing values of 0, 2, 4.
     """
     index = 0
     sortedkeys = sorted(dictionary.keys())
@@ -28,7 +27,9 @@ def initializeMissingKeys(dictionary: Dict):
         index += 1
 
 
-def sortItemsByLength(collection: Dict):
+def sortItemsByLength(
+        collection: Dict[int, List[str]]
+        ) -> Dict[int, List[str]]:
     """
     places items in an array in a dictionary
     where the key is the items length
@@ -92,7 +93,8 @@ def getCompletingWords(bigWord: str,
     return []
 
 
-def findContainedWords(word: str, wordCollections: Dict[int, List[str]]):
+def findContainedWords(word: str, wordCollections: Dict[int, List[str]]
+                       ) -> Tuple[str, str, str]:
     """
     finds all words wordCollections that can be combined to make word
 
@@ -110,22 +112,22 @@ def findContainedWords(word: str, wordCollections: Dict[int, List[str]]):
 
 
 def validateTargetWordSize(size: int, collections: Dict[int, List[str]]):
-    """ checks that the size targeted is in the collections keys"""
+    """ checks that the size of word targeted is in the collections keys"""
     if size not in collections.keys():
         raise ValueError("Target word size is not valid")
 
 
-def main():
-    start_time = time.time()
-    collection = readLines("words.txt")
-    targetWordSize = 6
+def main() -> None:
+    start_time: float = time.time()
+    collection: List[str] = readLines("words.txt")
+    targetWordSize: int = 6
 
-    sortedCollections = sortItemsByLength(collection)
+    sortedCollections: Dict[int, List[str]] = sortItemsByLength(collection)
     initializeMissingKeys(sortedCollections)
 
-    validateTargetWordSize(targetWordSize, sortedCollections)
+    validateTargetWordSize(size=targetWordSize, collections=sortedCollections)
 
-    results = []
+    results: List[Tuple[str, str, str]] = []
     for word in sortedCollections[targetWordSize]:
         results += findContainedWords(word, sortedCollections)
 

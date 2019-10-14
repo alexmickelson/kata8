@@ -1,0 +1,250 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>modular.modular &#8212; kata8  documentation</title>
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for modular.modular</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="k">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Tuple</span>
+<span class="kn">from</span> <span class="nn">pprint</span> <span class="k">import</span> <span class="n">pprint</span> <span class="k">as</span> <span class="n">pp</span>
+
+
+<div class="viewcode-block" id="readLines"><a class="viewcode-back" href="../../modular.html#modular.modular.readLines">[docs]</a><span class="k">def</span> <span class="nf">readLines</span><span class="p">(</span><span class="n">file</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Reads the file and returns an array of each row</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">fileHandle</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
+    <span class="n">words</span> <span class="o">=</span> <span class="n">fileHandle</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
+    <span class="n">words</span> <span class="o">=</span> <span class="p">[</span><span class="n">w</span><span class="o">.</span><span class="n">rstrip</span><span class="p">()</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">words</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">words</span></div>
+
+
+<div class="viewcode-block" id="initializeMissingKeys"><a class="viewcode-back" href="../../modular.html#modular.modular.initializeMissingKeys">[docs]</a><span class="k">def</span> <span class="nf">initializeMissingKeys</span><span class="p">(</span><span class="n">dictionary</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    if the dictionary has keys 1, 3, 5 it will fill in the</span>
+<span class="sd">    missing values of 0, 2, 4.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">index</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">sortedkeys</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">dictionary</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+    <span class="n">lastIndex</span> <span class="o">=</span> <span class="n">sortedkeys</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="k">while</span> <span class="n">index</span> <span class="o">&lt;</span> <span class="n">lastIndex</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">index</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="n">dictionary</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">index</span> <span class="o">+=</span> <span class="mi">1</span></div>
+
+
+<div class="viewcode-block" id="sortItemsByLength"><a class="viewcode-back" href="../../modular.html#modular.modular.sortItemsByLength">[docs]</a><span class="k">def</span> <span class="nf">sortItemsByLength</span><span class="p">(</span>
+        <span class="n">collection</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span>
+        <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    places items in an array in a dictionary</span>
+<span class="sd">    where the key is the items length</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">sortedCollections</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">collection</span><span class="p">:</span>
+        <span class="k">if</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">item</span><span class="p">)</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">sortedCollections</span><span class="o">.</span><span class="n">keys</span><span class="p">()):</span>
+            <span class="n">sortedCollections</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">item</span><span class="p">)]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">sortedCollections</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">item</span><span class="p">)]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">sortedCollections</span></div>
+
+
+<div class="viewcode-block" id="wordSizesSmallerThan"><a class="viewcode-back" href="../../modular.html#modular.modular.wordSizesSmallerThan">[docs]</a><span class="k">def</span> <span class="nf">wordSizesSmallerThan</span><span class="p">(</span><span class="n">word</span><span class="p">:</span> <span class="nb">range</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    returns a range starting at 0 and going up to one less</span>
+<span class="sd">    than the length of the word</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">word</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="itemIsFirstPart"><a class="viewcode-back" href="../../modular.html#modular.modular.itemIsFirstPart">[docs]</a><span class="k">def</span> <span class="nf">itemIsFirstPart</span><span class="p">(</span><span class="n">big</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">small</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">big</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="n">small</span><span class="p">)</span> <span class="ow">and</span> <span class="n">big</span> <span class="o">!=</span> <span class="n">small</span></div>
+
+
+<div class="viewcode-block" id="itemIsLastPart"><a class="viewcode-back" href="../../modular.html#modular.modular.itemIsLastPart">[docs]</a><span class="k">def</span> <span class="nf">itemIsLastPart</span><span class="p">(</span><span class="n">big</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">small</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">big</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="n">small</span><span class="p">)</span> <span class="ow">and</span> <span class="n">big</span> <span class="o">!=</span> <span class="n">small</span></div>
+
+
+<div class="viewcode-block" id="listOfRightSizedWords"><a class="viewcode-back" href="../../modular.html#modular.modular.listOfRightSizedWords">[docs]</a><span class="k">def</span> <span class="nf">listOfRightSizedWords</span><span class="p">(</span><span class="n">big</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                          <span class="n">small</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                          <span class="n">collections</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]):</span>
+    <span class="k">return</span> <span class="n">collections</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">big</span><span class="p">)</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">small</span><span class="p">)]</span></div>
+
+
+<div class="viewcode-block" id="getStartingWords"><a class="viewcode-back" href="../../modular.html#modular.modular.getStartingWords">[docs]</a><span class="k">def</span> <span class="nf">getStartingWords</span><span class="p">(</span><span class="n">bigWord</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">wordCollections</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Parses the wordcollections for smaller words that are the start</span>
+<span class="sd">    of the bigWord</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">sameStartingWords</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="n">wordSizesSmallerThan</span><span class="p">(</span><span class="n">bigWord</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">wordCollections</span><span class="p">[</span><span class="n">index</span><span class="p">]:</span>
+            <span class="k">if</span> <span class="n">itemIsFirstPart</span><span class="p">(</span><span class="n">bigWord</span><span class="p">,</span> <span class="n">word</span><span class="p">):</span>
+                <span class="n">sameStartingWords</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">word</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">sameStartingWords</span></div>
+
+
+<div class="viewcode-block" id="getCompletingWords"><a class="viewcode-back" href="../../modular.html#modular.modular.getCompletingWords">[docs]</a><span class="k">def</span> <span class="nf">getCompletingWords</span><span class="p">(</span><span class="n">bigWord</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                       <span class="n">smallWord</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                       <span class="n">wordCollections</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    if another word is in the collection that can append</span>
+<span class="sd">    to smallWord to make bigWord it will return</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">wordToFind</span> <span class="o">=</span> <span class="n">bigWord</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">smallWord</span><span class="p">):]</span>
+    <span class="k">for</span> <span class="n">secondHalf</span> <span class="ow">in</span> <span class="n">listOfRightSizedWords</span><span class="p">(</span><span class="n">bigWord</span><span class="p">,</span>
+                                            <span class="n">smallWord</span><span class="p">,</span>
+                                            <span class="n">wordCollections</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">wordToFind</span> <span class="o">==</span> <span class="n">secondHalf</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">[</span><span class="n">wordToFind</span><span class="p">]</span>
+    <span class="k">return</span> <span class="p">[]</span></div>
+
+
+<div class="viewcode-block" id="findContainedWords"><a class="viewcode-back" href="../../modular.html#modular.modular.findContainedWords">[docs]</a><span class="k">def</span> <span class="nf">findContainedWords</span><span class="p">(</span><span class="n">word</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">wordCollections</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span>
+                       <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    finds all words wordCollections that can be combined to make word</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    --------</span>
+<span class="sd">    an array of tuples with the structure (word, firstHalf, secondHalf)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">startWords</span> <span class="o">=</span> <span class="n">getStartingWords</span><span class="p">(</span><span class="n">word</span><span class="p">,</span> <span class="n">wordCollections</span><span class="p">)</span>
+    <span class="n">results</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">firstHalf</span> <span class="ow">in</span> <span class="n">startWords</span><span class="p">:</span>
+        <span class="c1"># could be more efficient if not using lists</span>
+        <span class="k">for</span> <span class="n">secondHalf</span> <span class="ow">in</span> <span class="n">getCompletingWords</span><span class="p">(</span><span class="n">word</span><span class="p">,</span> <span class="n">firstHalf</span><span class="p">,</span> <span class="n">wordCollections</span><span class="p">):</span>
+            <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">word</span><span class="p">,</span> <span class="n">firstHalf</span><span class="p">,</span> <span class="n">secondHalf</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">results</span></div>
+
+
+<div class="viewcode-block" id="validateTargetWordSize"><a class="viewcode-back" href="../../modular.html#modular.modular.validateTargetWordSize">[docs]</a><span class="k">def</span> <span class="nf">validateTargetWordSize</span><span class="p">(</span><span class="n">size</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">collections</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]):</span>
+    <span class="sd">&quot;&quot;&quot; checks that the size of word targeted is in the collections keys&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">size</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">collections</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Target word size is not valid&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="main"><a class="viewcode-back" href="../../modular.html#modular.modular.main">[docs]</a><span class="k">def</span> <span class="nf">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="n">start_time</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+    <span class="n">collection</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">readLines</span><span class="p">(</span><span class="s2">&quot;words.txt&quot;</span><span class="p">)</span>
+    <span class="n">targetWordSize</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">6</span>
+
+    <span class="n">sortedCollections</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="n">sortItemsByLength</span><span class="p">(</span><span class="n">collection</span><span class="p">)</span>
+    <span class="n">initializeMissingKeys</span><span class="p">(</span><span class="n">sortedCollections</span><span class="p">)</span>
+
+    <span class="n">validateTargetWordSize</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">targetWordSize</span><span class="p">,</span> <span class="n">collections</span><span class="o">=</span><span class="n">sortedCollections</span><span class="p">)</span>
+
+    <span class="n">results</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">sortedCollections</span><span class="p">[</span><span class="n">targetWordSize</span><span class="p">]:</span>
+        <span class="n">results</span> <span class="o">+=</span> <span class="n">findContainedWords</span><span class="p">(</span><span class="n">word</span><span class="p">,</span> <span class="n">sortedCollections</span><span class="p">)</span>
+
+    <span class="n">pp</span><span class="p">(</span><span class="n">results</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Count: &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">results</span><span class="p">)))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Seconds: </span><span class="si">%s</span><span class="s2"> &quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_time</span><span class="p">))</span></div>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Count: 30599</span>
+<span class="sd">    Seconds: 138.884605884552,</span>
+
+<span class="sd">    Count: 30599</span>
+<span class="sd">    Seconds: 147.0303237438202</span>
+
+<span class="sd">    Count: 30599</span>
+<span class="sd">    Seconds: 116.19400000572205</span>
+
+<span class="sd">    Count: 30599</span>
+<span class="sd">    Seconds: 127.60181665420532</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">main</span><span class="p">()</span>
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../index.html">kata8</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, alex.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.2.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>
